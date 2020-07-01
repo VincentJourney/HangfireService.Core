@@ -17,7 +17,7 @@ namespace HangfireService.Core
         {
             var host = CreateWebHostBuilder(args).Build();
 
-            host.RunAsService();
+            //host.RunAsService();
 
             host.Run();
         }

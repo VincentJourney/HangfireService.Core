@@ -52,10 +52,10 @@ namespace HangfireService.Core
             app.UseMvc();
 
 
-            RecurringJob.AddOrUpdate("订单取消", () => OrderJob.OrderCancelTask(), ConfigUtil.OrderCancelCron);
+            RecurringJob.AddOrUpdate("core订单取消", () => OrderJob.OrderCancelTask(), ConfigUtil.OrderCancelCron);
 
             if (ConfigUtil.OrderReturnEnabled)
-                RecurringJob.AddOrUpdate("订单退款", () => OrderJob.OrderReturnTask(), Cron.Daily(ConfigUtil.OrderReturnTime));
+                RecurringJob.AddOrUpdate("core订单退款", () => OrderJob.OrderReturnTask(), Cron.Daily(ConfigUtil.OrderReturnTime));
         }
     }
 }

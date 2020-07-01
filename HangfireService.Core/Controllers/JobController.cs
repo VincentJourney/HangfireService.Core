@@ -20,7 +20,7 @@ namespace HangfireService.Core.Controllers
             try
             {
                 RecurringJob.AddOrUpdate(jobModel.Name,
-                                         () => PlatformCommunication.PostCRM<object>(jobModel.Url, jobModel.Data),
+                                         () => PlatformExcute(jobModel.Url, jobModel.Data),
                                          jobModel.Corn,
                                          TimeZoneInfo.Local);
 
@@ -32,6 +32,11 @@ namespace HangfireService.Core.Controllers
             }
 
 
+        }
+
+        public static object PlatformExcute(string Url, object data)
+        {
+            return PlatformCommunication.PostCRM<object>(Url, data);
         }
     }
 }
