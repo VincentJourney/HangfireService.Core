@@ -12,14 +12,14 @@ namespace HangfireService.Core.Filter
 {
     public class CustomJobFilter : JobFilterAttribute, IClientFilter, IServerFilter, IElectStateFilter
     {
-       // private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
+        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
         /// <summary>
         /// 创建任务前
         /// </summary>
         /// <param name="context"></param>
         public void OnCreating(CreatingContext context)
         {
-
+            Logger.Warn("OnCreating");
         }
         /// <summary>
         /// 创建完成
@@ -27,7 +27,7 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnCreated(CreatedContext context)
         {
-
+            Logger.Warn("OnCreated");
         }
         /// <summary>
         /// 开始执行任务
@@ -35,7 +35,7 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnPerforming(PerformingContext context)
         {
-
+            Logger.Warn("OnPerforming");
         }
         /// <summary>
         /// 执行完毕
@@ -43,7 +43,7 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnPerformed(PerformedContext context)
         {
-           
+            Logger.Warn("OnPerformed");
         }
         /// <summary>
         /// 异常
@@ -51,15 +51,14 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnStateElection(ElectStateContext context)
         {
-            //
-            //var failedState = context.CandidateState as FailedState;
-            //if (failedState != null)
-            //{
-            //    Logger.WarnFormat(
-            //        "Job `{0}` has been failed due to an exception `{1}`",
-            //        context.BackgroundJob.Id,
-            //        failedState.Exception);
-            //}
+            var failedState = context.CandidateState as FailedState;
+            if (failedState != null)
+            {
+                Logger.WarnFormat(
+                    "Job `{0}` has been failed due to an exception `{1}`",
+                    context.BackgroundJob.Id,
+                    failedState.Exception);
+            }
         }
 
     }

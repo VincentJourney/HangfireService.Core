@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting.WindowsServices;
+using Serilog;
 
 namespace HangfireService.Core
 {
@@ -24,6 +25,16 @@ namespace HangfireService.Core
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            .ConfigureLogging(c =>
+            {
+                c.ClearProviders();
+            })
+            .UseSerilog((context, config) =>
+            {
+                config.ReadFrom.Configuration(context.Configuration)
+                .Enrich.FromLogContext();
+                config.MinimumLevel.Warning();
+            })
+            .UseStartup<Startup>();
     }
 }

@@ -12,6 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Serilogs\**" />
+    <Content Remove="Serilogs\**" />
+    <EmbeddedResource Remove="Serilogs\**" />
+    <None Remove="Serilogs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="关闭服务.bat" />
     <None Remove="删除服务.bat" />
     <None Remove="安装并启动服务.bat" />
@@ -40,6 +47,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
 
