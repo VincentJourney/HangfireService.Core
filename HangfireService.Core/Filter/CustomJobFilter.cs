@@ -19,6 +19,7 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnCreating(CreatingContext context)
         {
+            Logger.Warn("OnCreating");
         }
         /// <summary>
         /// 创建完成
@@ -26,7 +27,7 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnCreated(CreatedContext context)
         {
-
+            Logger.Warn("OnCreated");
         }
         /// <summary>
         /// 开始执行任务
@@ -34,7 +35,7 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnPerforming(PerformingContext context)
         {
-
+            Logger.Warn("OnPerforming");
         }
         /// <summary>
         /// 执行完毕
@@ -42,7 +43,7 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnPerformed(PerformedContext context)
         {
-
+            Logger.Warn("OnPerformed");
         }
         /// <summary>
         /// 异常
@@ -50,15 +51,14 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnStateElection(ElectStateContext context)
         {
-            //
-            //var failedState = context.CandidateState as FailedState;
-            //if (failedState != null)
-            //{
-            //    Logger.WarnFormat(
-            //        "Job `{0}` has been failed due to an exception `{1}`",
-            //        context.BackgroundJob.Id,
-            //        failedState.Exception);
-            //}
+            var failedState = context.CandidateState as FailedState;
+            if (failedState != null)
+            {
+                Logger.WarnFormat(
+                    "Job `{0}` has been failed due to an exception `{1}`",
+                    context.BackgroundJob.Id,
+                    failedState.Exception);
+            }
         }
 
     }

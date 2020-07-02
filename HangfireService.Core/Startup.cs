@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using HangfireService.Business.CrmPlatForm.Job;
 using HangfireService.Commom;
 using Microsoft.OpenApi.Models;
+using HangfireService.Core.Filter;
 
 namespace HangfireService.Core
 {
@@ -32,9 +33,10 @@ namespace HangfireService.Core
             {
                 config.UseSqlServerStorage(ConfigUtil.ConnectionString);
                 config.UseSerilogLogProvider();
+                config.UseFilter<CustomJobFilter>(new CustomJobFilter());
             });
 
-            //  services.AddHangfireServer();
+            services.AddHangfireServer();
 
             //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(c =>

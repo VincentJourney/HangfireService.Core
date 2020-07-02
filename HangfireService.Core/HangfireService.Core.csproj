@@ -12,6 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Serilogs\**" />
+    <Content Remove="Serilogs\**" />
+    <EmbeddedResource Remove="Serilogs\**" />
+    <None Remove="Serilogs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="关闭服务.bat" />
     <None Remove="删除服务.bat" />
     <None Remove="安装并启动服务.bat" />
