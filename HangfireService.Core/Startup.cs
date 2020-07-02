@@ -32,6 +32,18 @@ namespace HangfireService.Core
                 config.UseSqlServerStorage(ConfigUtil.ConnectionString);
             });
             services.AddHangfireServer();
+
+            //注册Swagger生成器，定义一个和多个Swagger 文档
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Hangfire.HttpJob",
+                    Version = "v1",
+                    Description = "动态新增任务"
+                });
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -49,6 +61,17 @@ namespace HangfireService.Core
                 IsReadOnlyFunc = Context => false,
                 Authorization = new[] { new CustomAuthorizeFilter() }
             });
+
+
+            //启用中间件服务生成Swagger作为JSON终结点
+            app.UseSwagger();
+            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                //c.RoutePrefix = string.Empty;
+            });
+
             app.UseMvc();
 
 
