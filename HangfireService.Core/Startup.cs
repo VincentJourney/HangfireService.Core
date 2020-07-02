@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using HangfireService.Business.CrmPlatForm.Job;
 using HangfireService.Commom;
+using Microsoft.OpenApi.Models;
 
 namespace HangfireService.Core
 {
@@ -33,16 +34,22 @@ namespace HangfireService.Core
                 config.UseSerilogLogProvider();
             });
 
-          //  services.AddHangfireServer();
+            //  services.AddHangfireServer();
 
             //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Hangfire.HttpJob",
                     Version = "v1",
-                    Description = "动态新增任务"
+                    Description = "扩展=>HttpApi操作任务",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Vincent",
+                        Email = "953567835@qq.com",
+                        Url = new Uri("https://github.com/VincentJourney/HangfireService.Core")
+                    }
                 });
             });
 
