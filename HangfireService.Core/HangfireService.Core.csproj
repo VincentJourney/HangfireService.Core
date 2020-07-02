@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <OutputType>WinExe</OutputType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -9,6 +10,24 @@
     <OutputPath>bin\Debug\netcoreapp2.1\</OutputPath>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="关闭服务.bat" />
+    <None Remove="删除服务.bat" />
+    <None Remove="安装并启动服务.bat" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="关闭服务.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="删除服务.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="安装并启动服务.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Extensions\" />
@@ -26,6 +45,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HangfireService.Business\HangfireService.Business.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="安装并启动服务.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

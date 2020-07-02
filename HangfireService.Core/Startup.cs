@@ -31,7 +31,8 @@ namespace HangfireService.Core
             {
                 config.UseSqlServerStorage(ConfigUtil.ConnectionString);
             });
-            services.AddHangfireServer();
+
+          //  services.AddHangfireServer();
 
             //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(c =>
