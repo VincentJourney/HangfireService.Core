@@ -17,7 +17,8 @@ namespace HangfireService.Core.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            Logger.Warn("Log");
+            Logger.Info("Info");
+            Logger.Warn("Warn");
             Logger.Error("Error");
             return new string[] { "value1", "value2" };
         }

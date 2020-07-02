@@ -33,6 +33,7 @@ namespace HangfireService.Core
             {
                 config.ReadFrom.Configuration(context.Configuration)
                 .Enrich.FromLogContext();
+                config.MinimumLevel.Warning();
             })
             .UseStartup<Startup>();
     }
