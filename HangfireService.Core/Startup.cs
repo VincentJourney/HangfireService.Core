@@ -14,6 +14,7 @@ using HangfireService.Business.CrmPlatForm.Job;
 using HangfireService.Commom;
 using Microsoft.OpenApi.Models;
 using HangfireService.Core.Filter;
+using Hangfire.Dashboard;
 
 namespace HangfireService.Core
 {
@@ -64,12 +65,32 @@ namespace HangfireService.Core
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHangfireDashboard("/Hangfire", new DashboardOptions
+
+
+
+            app.UseHangfireDashboard("/Hangfire-Read", new DashboardOptions
             {
                 AppPath = "#",
                 DisplayStorageConnectionString = true,
+                IsReadOnlyFunc = Context => true,
+                Authorization = new[] { new CustomAuthorizeFilter(new List<AuthorizeUser>
+                {
+                   new AuthorizeUser{ UserName="admin",PassWord="123456" },
+                   new AuthorizeUser{ UserName="aic",PassWord="123456" },
+                }) }
+            });
+
+            app.UseHangfireDashboard("/Hangfire", new DashboardOptions
+            {
+                IgnoreAntiforgeryToken = true,
+                AppPath = "#",
+                DisplayStorageConnectionString = true,
                 IsReadOnlyFunc = Context => false,
-                Authorization = new[] { new CustomAuthorizeFilter() }
+                Authorization = new[] { new CustomAuthorizeFilter(new List<AuthorizeUser>
+                {
+                   new AuthorizeUser{ UserName="admin",PassWord="123456" },
+                   new AuthorizeUser{ UserName="aic",PassWord="123456" },
+                }) }
             });
 
 
