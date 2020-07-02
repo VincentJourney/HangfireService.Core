@@ -38,14 +38,13 @@ namespace HangfireService.Core
 
             services.AddHangfireServer();
 
-            //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Hangfire.HttpJob",
                     Version = "v1",
-                    Description = "扩展=>HttpApi操作任务",
+                    Description = "Extensions => HttpApi Operation Job",
                     Contact = new OpenApiContact
                     {
                         Name = "Vincent",
@@ -67,29 +66,23 @@ namespace HangfireService.Core
             }
             app.UseHangfireDashboard("/Hangfire", new DashboardOptions
             {
-                AppPath = "#",//返回时跳转的地址
-                DisplayStorageConnectionString = true,//是否显示数据库连接信息
+                AppPath = "#",
+                DisplayStorageConnectionString = true,
                 IsReadOnlyFunc = Context => false,
                 Authorization = new[] { new CustomAuthorizeFilter() }
             });
 
 
-            //启用中间件服务生成Swagger作为JSON终结点
             app.UseSwagger();
-            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                //c.RoutePrefix = string.Empty;
             });
 
             app.UseMvc();
-
-
-            RecurringJob.AddOrUpdate("core订单取消", () => OrderJob.OrderCancelTask(), ConfigUtil.OrderCancelCron);
-
-            if (ConfigUtil.OrderReturnEnabled)
-                RecurringJob.AddOrUpdate("core订单退款", () => OrderJob.OrderReturnTask(), Cron.Daily(ConfigUtil.OrderReturnTime));
+            //RecurringJob.AddOrUpdate("core订单取消", () => OrderJob.OrderCancelTask(), ConfigUtil.OrderCancelCron);
+            //if (ConfigUtil.OrderReturnEnabled)
+            //    RecurringJob.AddOrUpdate("core订单退款", () => OrderJob.OrderReturnTask(), Cron.Daily(ConfigUtil.OrderReturnTime));
         }
     }
 }
