@@ -30,6 +30,7 @@ namespace HangfireService.Core
             services.AddHangfire(config =>
             {
                 config.UseSqlServerStorage(ConfigUtil.ConnectionString);
+                config.UseSerilogLogProvider();
             });
 
           //  services.AddHangfireServer();

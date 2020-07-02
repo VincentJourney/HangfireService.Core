@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hangfire.Logging;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace HangfireService.Core.Controllers
 {
@@ -10,10 +12,13 @@ namespace HangfireService.Core.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            Logger.Warn("Log");
+            Logger.Error("Error");
             return new string[] { "value1", "value2" };
         }
 

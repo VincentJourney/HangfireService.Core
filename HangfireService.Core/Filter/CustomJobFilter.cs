@@ -12,14 +12,13 @@ namespace HangfireService.Core.Filter
 {
     public class CustomJobFilter : JobFilterAttribute, IClientFilter, IServerFilter, IElectStateFilter
     {
-       // private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
+        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
         /// <summary>
         /// 创建任务前
         /// </summary>
         /// <param name="context"></param>
         public void OnCreating(CreatingContext context)
         {
-
         }
         /// <summary>
         /// 创建完成
@@ -43,7 +42,7 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnPerformed(PerformedContext context)
         {
-           
+
         }
         /// <summary>
         /// 异常
