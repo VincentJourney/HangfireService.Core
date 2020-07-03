@@ -37,7 +37,7 @@ namespace HangfireService.Core
                 config.UseFilter<CustomJobFilter>(new CustomJobFilter());
             });
 
-            services.AddHangfireServer();
+            //services.AddHangfireServer();
 
             services.AddSwaggerGen(c =>
             {
