@@ -17,8 +17,8 @@ namespace HangfireService.Core
         public bool Authorize([NotNull] DashboardContext context)
         {
             var httpcontext = context.GetHttpContext();
-            return httpcontext.User.Identity.IsAuthenticated;
-            //return true;
+           // return httpcontext.User.Identity.IsAuthenticated;
+            return true;
         }
 
     }

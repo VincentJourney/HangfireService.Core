@@ -53,6 +53,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HangfireService.Business\HangfireService.Business.csproj" />
+    <ProjectReference Include="..\HangfireService.HttpJob\HangfireService.HttpJob.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -22,7 +22,7 @@ namespace HangfireService.Business.CrmPlatForm.Job
         {
             try
             {
-                var ClientUrl = $"api/master/{ApiName}";
+                var ClientUrl = $"api/task/{ApiName}";
                 var param = new RequestModel<int>
                 {
                     Shared = new Shared(),

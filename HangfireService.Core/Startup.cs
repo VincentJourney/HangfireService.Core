@@ -65,9 +65,6 @@ namespace HangfireService.Core
             {
                 app.UseDeveloperExceptionPage();
             }
-
-
-
             app.UseHangfireDashboard("/Hangfire-Read", new DashboardOptions
             {
                 AppPath = "#",

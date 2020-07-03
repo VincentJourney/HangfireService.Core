@@ -19,7 +19,9 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnCreating(CreatingContext context)
         {
-            Logger.Warn("OnCreating");
+            var jobname = context.Parameters.FirstOrDefault().Value;
+            var arg = string.Join(" , ", context.Job.Args.ToArray());
+            Logger.WarnFormat( "  开始创建  Job `{0}` ,  Arg is  `{1}`", jobname, arg);
         }
         /// <summary>
         /// 创建完成
@@ -27,7 +29,9 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnCreated(CreatedContext context)
         {
-            Logger.Warn("OnCreated");
+            var jobname = context.Parameters.FirstOrDefault().Value;
+            var arg = string.Join(" , ", context.Job.Args.ToArray());
+            Logger.WarnFormat("  创建完成  Job `{0}` ,  Arg is  `{1}`", jobname, arg);
         }
         /// <summary>
         /// 开始执行任务
@@ -35,7 +39,9 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnPerforming(PerformingContext context)
         {
-            Logger.Warn("OnPerforming");
+            var jobname = context.JobId;
+            var arg = string.Join(" , ", context.Job.Args.ToArray());
+            Logger.WarnFormat("  开始执行  Job `{0}` ,  Arg is  `{1}`", jobname, arg);
         }
         /// <summary>
         /// 执行完毕
@@ -43,7 +49,9 @@ namespace HangfireService.Core.Filter
         /// <param name="context"></param>
         public void OnPerformed(PerformedContext context)
         {
-            Logger.Warn("OnPerformed");
+            var jobname = context.JobId;
+            var arg = string.Join(" , ", context.Job.Args.ToArray());
+            Logger.WarnFormat("   执行完毕  Job `{0}` ,  Arg is  `{1}`", jobname, arg);
         }
         /// <summary>
         /// 异常

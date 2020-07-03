@@ -13,7 +13,7 @@ namespace HangfireService.Business.CrmPlatForm.Infrastructure
 
         private static string GetToken()
         {
-            var url = $"{ConfigUtil.CRMUrl}api/platform/token?appid={ConfigUtil.CRMTokenAppid}&secret={ConfigUtil.CRMTokenSecret}";
+            var url = $"{ConfigUtil.CRMUrl}/api/platform/token?appid={ConfigUtil.CRMTokenAppid}&secret={ConfigUtil.CRMTokenSecret}";
             var res = HttpHelper.HttpGet(url);
             ResponseModel<string> r = null;
             try

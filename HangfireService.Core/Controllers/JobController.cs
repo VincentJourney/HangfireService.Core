@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Hangfire;
 using HangfireService.Model;
 using HangfireService.Business.CrmPlatForm.Infrastructure;
+using Hangfire.Logging;
+using Microsoft.Extensions.Logging;
+using HangfireService.HttpJob;
 
 namespace HangfireService.Core.Controllers
 {
@@ -13,6 +16,11 @@ namespace HangfireService.Core.Controllers
     [ApiController]
     public class JobController : ControllerBase
     {
+        private readonly Microsoft.Extensions.Logging.ILogger _logger;
+        public JobController(ILogger<JobController> logger)
+        {
+            _logger = logger;
+        }
         [HttpPost]
         [Route("AddRecurringJob")]
         public IActionResult AddRecurringJob([FromBody] AddJobModel jobModel)
@@ -20,7 +28,7 @@ namespace HangfireService.Core.Controllers
             try
             {
                 RecurringJob.AddOrUpdate(jobModel.Name,
-                                         () => PlatformExcute(jobModel.Url, jobModel.Data),
+                                         () => HangfireService.HttpJob.HttpJobExcuter.PlatformExcute(jobModel.Url, jobModel.Data),
                                          jobModel.Corn,
                                          TimeZoneInfo.Local);
 
@@ -34,9 +42,6 @@ namespace HangfireService.Core.Controllers
 
         }
 
-        public static object PlatformExcute(string Url, object data)
-        {
-            return PlatformCommunication.PostCRM<object>(Url, data);
-        }
+
     }
 }
